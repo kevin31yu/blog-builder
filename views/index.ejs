@@ -1,0 +1,46 @@
+<%- include("partials/header.ejs") %>
+    <div class="container my-5 text-bg-primary rounded">
+        <h1 class="text-center">Create blog</h1>
+        <form action="/submit" method="post">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" id="title" name="title" required>
+            </div>
+            <div class="form-group">
+                <label for="info">Info</label>
+                <textarea class="form-control" id="info" name="info" rows="4" required></textarea>
+            </div>
+            <div class="col-12 text-center">
+                <button type="submit" class="btn btn-secondary my-3">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="container my-5">
+        <div class="main row">
+            <% if (entries.length > 0) { %>
+                <% entries.forEach((entry, index)=> { %>
+                    <div class="col-lg-4 mb-4">
+                        <div class="text-bg-primary rounded p-4">
+                            <h2 class="fw-normal">
+                                <%= entry.title %>
+                            </h2>
+                            <p>
+                                <%= entry.info %>
+                            </p>
+                            <form action="/delete/<%= index %>" method="post">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                    <% }) %>
+                        <% } else { %>
+                            <div class="col-12">
+                                <p class="text-center">No posts yet.</p>
+                            </div>
+                            <% } %>
+        </div>
+    </div>
+    </body>
+
+    </html>
